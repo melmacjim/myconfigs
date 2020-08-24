@@ -1,0 +1,31 @@
+## PLACE TIMESTAMPS IN BASH HISTORY
+export HISTTIMEFORMAT="%m/%d/%y %T "
+
+
+## CUSTOME BASH PROMPT
+RED="\[\033[01;31m\]"
+BLUE="\[\033[01;34m\]"
+BLUELT="\[\033[01;96m\]"
+GREEN="\[\033[01;32m\]"
+YELLOW="\[\033[01;33m\]"
+GRAYLT="\[\033[01;37m\]"
+GRAYDK="\[\033[01;90m\]"
+RESETC="\[\033[00m\]"
+if id | awk '{print $1}' | grep "uid=0" > /dev/null ;  then
+  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC} ${RED}\u@\h${RESETC}:${BLUE}\W ${RED}#${RESETC} "
+else
+  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC} ${GREEN}\u@\h${RESETC}:${BLUE}\W ${GREEN}\$${RESETC} "
+fi
+
+
+## SOME COMMON ALIASES
+alias la='ls -ahl'
+alias ll='ls -lh'
+alias pdfview='evince'
+alias shred3='shred -n2 -uzfv'
+alias tar-list='tar -tvf'
+
+## SOME ALIASES TO SCRIPTS IN THE GITHUB REPO (only apply if the repo is there)
+if [ -d "$GITHUB_REPO_DIR/sshcrypt"  ] ; then
+  alias sshcrypt='$GITHUB_REPO_DIR/sshcrypt/sshcrypt.sh'
+fi
