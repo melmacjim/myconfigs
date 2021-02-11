@@ -12,9 +12,9 @@ GRAYLT="\[\033[01;37m\]"
 GRAYDK="\[\033[01;90m\]"
 RESETC="\[\033[00m\]"
 if id | awk '{print $1}' | grep "uid=0" > /dev/null ;  then
-  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC} ${RED}\u@\h${RESETC}:${BLUE}\W ${RED}#${RESETC} "
+  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC}\n${RED}\u@\h${RESETC}:${BLUE}\W ${RED}#${RESETC} "
 else
-  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC} ${GREEN}\u@\h${RESETC}:${BLUE}\W ${GREEN}\$${RESETC} "
+  PS1="${debian_chroot:+($debian_chroot)}${YELLOW}\t${RESETC}\n${GREEN}\u@\h${RESETC}:${BLUE}\W ${GREEN}\$${RESETC} "
 fi
 
 
