@@ -29,7 +29,7 @@ ipinfo () {
         printf "Public  IP Address -> ${PUB_IP}\n"
         printf "Private IP Address -> ${PRI_IP}\n\n"
         printf "Local Name Server -> $(echo $(grep nameserver /etc/resolv.conf | awk '{print $2}'))\n\n"
-        if [ -z $1 ] || [ ! $1 = "-s" ] ; then
+        if [ ! -z $1 ] && [ "$1" = "-a" ] ; then
           if uname -a | grep -i darwin ; then
             netstat -nr -f inet ; echo ""
           else
