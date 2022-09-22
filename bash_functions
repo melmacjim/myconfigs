@@ -60,6 +60,13 @@ sslcheck () {
   fi
 }
 
+sslcheck-full () {
+  echo $1
+  echo \
+    | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null \
+    | openssl x509 -inform pem -noout -text
+}
+
 pingport () {
   if hping3 -h > /dev/null ; then
     if [ "$1" = "-h" ] || [ "$1" = "--help" ] ; then
