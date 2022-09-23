@@ -18,13 +18,6 @@ else
 fi
 
 
-## SOME COMMON ALIASES
-alias la='ls -ahl'
-alias ll='ls -lh'
-alias pdfview='evince'
-alias shred3='shred -n2 -uzfv'
-alias tar-list='tar -tvf'
-
 ## SOME ALIASES TO SCRIPTS IN THE GITHUB REPO (only apply if the repo is there)
 if [ -d "$GITHUB_REPO_DIR/sshcrypt"  ] ; then
   alias sshcrypt='$GITHUB_REPO_DIR/sshcrypt/sshcrypt.sh'
