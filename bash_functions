@@ -53,7 +53,7 @@ sslcheck () {
     if [ -z "$website" ] ; then
       printf "\nUsage: sslcheck google.com\n\n"
     else
-      nmap --script=ssl-cert.nse -Pn -p443 $website |grep -v Nmap
+      nmap --script=ssl-cert.nse -Pn -p443 $website | grep -v Nmap
     fi
   else
     printf "\nNmap isn't installed.\n\n"
