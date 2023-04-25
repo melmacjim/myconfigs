@@ -23,7 +23,7 @@ ipinfo () {
         local REGION="$(jq -r .region $TEMPFILE)"
         local COUNTRY="$(jq -r .country $TEMPFILE)"
         local PUB_IP="$(jq -r .ip $TEMPFILE)"
-        local PRI_IP="$(echo $(ifconfig | grep " 192.168.\| 172.\| 10." | awk '/inet /{print $2}'))"
+        local PRI_IP="$(var=$(ip -br a s | grep -E "192.168.|172.|10." | awk '{print $3}') ; echo -n $var)"
         printf "\n$(date)\n\n"
         printf "IP Address Location -> ${CITY}, ${REGION}, ${COUNTRY}\n\n"
         printf "Public  IP Address -> ${PUB_IP}\n"
