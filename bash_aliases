@@ -2,6 +2,7 @@
 
 alias la='ls -ahl'
 alias ll='ls -lh'
+alias list-ssids='nmcli dev wifi'
 alias gpg-receive-key='gpg --keyserver pgp.mit.edu --recv-keys'
 alias pdfview='evince'
 alias shred3='shred -n2 -uzfv'
