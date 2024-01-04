@@ -68,7 +68,7 @@ sslcheck-full () {
 }
 
 pingport () {
-  if hping3 -h > /dev/null ; then
+  if sudo hping3 -h > /dev/null ; then
     if [ "$1" = "-h" ] || [ "$1" = "--help" ] ; then
       echo -e "Usage:\n\tpingport 80 example.com\n"
     elif [ -z "$1" ] ; then
