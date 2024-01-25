@@ -131,4 +131,24 @@ listdrives () {
   echo ""
 }
 
+yopass () {
+  if [ -z "$1" ] ; then
+    echo -e "\n\nUsage: yopass \"string to encrypted\"\n\n"
+  else
+    if ! gpg -h > /dev/null ; then
+      echo "gpg not found!"
+    else
+      ## source: https://github.com/jhaals/yopass/issues/19#issuecomment-1073988012 (user bahho)
+      message="$1"
+      password=$(tr -dc A-Za-z0-9 </dev/urandom | head -c 20 );
+      echo $password > pass.txt
+      # encrypt message with pass.txt and replace newlines with "\n"
+      message=$(echo $message | gpg -a --batch --passphrase-file pass.txt -c  --cipher-algo AES256 | sed ':a;N;$!ba;s/\n/\\n/g' );
+      payload="{ \"message\": \"${message}\", \"expiration\": 3600 , \"one_time\": true }"
+      secret_id=$(curl -s -XPOST  https://api.yopass.se/secret -H 'Content-Type: application/json' -d "${payload}" |  jq -r .message)
+      echo -e "\n\nThe link below can only be used once and will only least for 1 hour.\n\nhttps://yopass.se/#/s/$secret_id/$password\n\n"
+    fi
+  fi
+}
+
 ## OTHER END ##
