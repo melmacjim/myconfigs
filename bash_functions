@@ -131,6 +131,23 @@ listdrives () {
   echo ""
 }
 
+update-upgrade () {
+  if uname -v | grep -qi debian ; then
+    if [ "$UID" -eq "0" ] ; then
+      { set -e
+        apt-get update
+        apt list --upgradable
+        apt-get upgrade -y
+        apt-get update
+        apt-get autoremove -y
+        set +e
+      } |& tee -a /var/log/apt-update-$(date +%Y%m%dT%H%M).log
+    else
+      echo -e "\nonly executable by root (or via sudo)\n"
+    fi
+  fi
+}
+
 yopass () {
   if [ -z "$1" ] ; then
     echo -e "\n\nUsage: yopass \"string to encrypted\"\n\n"
