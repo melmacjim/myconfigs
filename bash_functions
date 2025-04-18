@@ -53,6 +53,7 @@ sslcheck () {
     if [ -z "$website" ] ; then
       printf "\nUsage: sslcheck google.com\n\n"
     else
+      echo -e "\nChecking the SSL certificate for $1 ...\n"
       nmap --script=ssl-cert.nse -Pn -p443 $website | grep -v Nmap
     fi
   else
@@ -61,7 +62,7 @@ sslcheck () {
 }
 
 sslcheck-full () {
-  echo $1
+  echo -e "\nChecking the SSL certificate for $1 ...\n"
   echo \
     | openssl s_client -showcerts -servername $1 -connect $1:443 2>/dev/null \
     | openssl x509 -inform pem -noout -text
@@ -164,6 +165,7 @@ yopass () {
       payload="{ \"message\": \"${message}\", \"expiration\": 3600 , \"one_time\": true }"
       secret_id=$(curl -s -XPOST  https://api.yopass.se/secret -H 'Content-Type: application/json' -d "${payload}" |  jq -r .message)
       echo -e "\n\nThe link below can only be used once and will only least for 1 hour.\n\nhttps://yopass.se/#/s/$secret_id/$password\n\n"
+      rm -f pass.txt
     fi
   fi
 }
